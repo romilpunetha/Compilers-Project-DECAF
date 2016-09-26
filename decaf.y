@@ -44,13 +44,16 @@ FILE * fp= fopen ("test_output.txt", "w");
 %token NOT
 %left TYPE
 
+%nonassoc ELSE
+%nonassoc '='
 %left OR
 %left AND
-%left EQUAL_EQUAL NOT_EQUAL
-%left GREATER_EQUAL LESS_EQUAL 
+%nonassoc EQUAL_EQUAL NOT_EQUAL
+%nonassoc LESS GREATER GREATER_EQUAL LESS_EQUAL 
 %left PLUS MINUS 
-%left MULTIPLY  MOD DIVIDE 
-%left LESS GREATER
+%left MULTIPLY DIVIDE MOD
+%nonassoc '!'
+%nonassoc '[' '.'
 
 
 %%
