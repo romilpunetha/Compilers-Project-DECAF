@@ -12,8 +12,13 @@ int main(int argc, char **argv){
     cerr << argv[0] << ": File " << argv[1] << " cannot be opened.\n";
     return 1;
   }
-  yyparse();
-  cout << "Success\n";
+	freopen("flex_output.txt","w",stdout);
+	freopen(NULL,"w",stdout);
+	int a =yyparse();
+    if(!a) fprintf(stderr,"Lexical Analysis - Success\n");
+   	else fprintf(stderr,"Lexical Analysis - Error\n");
+	yyparse();
+	cout << "Success\n";
   return 0;
 }
 

@@ -1,7 +1,8 @@
 class Program {
 int a(int b){
-int f,g;
+int f,g,h;
 f=10;
-g=f;
+g=20;
+h=f+g;
 }
 }

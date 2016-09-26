@@ -778,239 +778,239 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 13 "decaf.l"
-{return CLASS;}
+{cout<<"CLASS\n";return CLASS;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 15 "decaf.l"
-{return PROGRAM;}
+{cout<<"PROGRAM\n";return PROGRAM;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 17 "decaf.l"
-{return TYPE;}
+{cout<<"TYPE\n";return TYPE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 19 "decaf.l"
-{return VOID;}
+{cout<<"VOID\n";return VOID;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 21 "decaf.l"
-{return BOOL_LITERAL;}
+{cout<<"BOOL_LITERAL\n";return BOOL_LITERAL;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 23 "decaf.l"
-{return BOOL_LITERAL;}
+{cout<<"BOOL_LITERAL\n";return BOOL_LITERAL;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 25 "decaf.l"
-{return FOR;} 
+{cout<<"FOR\n";return FOR;} 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 27 "decaf.l"
-{return IF;}
+{cout<<"IF\n";return IF;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 29 "decaf.l"
-{return ELSE;}
+{cout<<"ELSE\n";return ELSE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 31 "decaf.l"
-{return BREAK;}
+{cout<<"BREAK\n";return BREAK;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 33 "decaf.l"
-{return CONTINUE;}
+{cout<<"CONTINUE\n";return CONTINUE;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 35 "decaf.l"
-{return RETURN;}
+{cout<<"RETURN\n";return RETURN;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 37 "decaf.l"
-{return CALLOUT;}
+{cout<<"CALLOUT\n";return CALLOUT;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 38 "decaf.l"
-{return SEMI_COLON;}
+#line 39 "decaf.l"
+{cout<<"SEMI_COLON\n";return SEMI_COLON;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 39 "decaf.l"
-{return OPEN_PARENTHESES ;}
+#line 41 "decaf.l"
+{cout<<"OPEN_PARENTHESES\n";return OPEN_PARENTHESES ;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 40 "decaf.l"
-{return CLOSE_PARENTHESES;}
+#line 43 "decaf.l"
+{cout<<"CLOSE_PARENTHESES\n";return CLOSE_PARENTHESES;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 41 "decaf.l"
-{return OPEN_SQR_BRACKET;}
+#line 45 "decaf.l"
+{cout<<"OPEN_SQR_BRACKET\n";return OPEN_SQR_BRACKET;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 42 "decaf.l"
-{return CLOSE_SQR_BRACKET;}
+#line 47 "decaf.l"
+{cout<<"CLOSE_SQR_BRACKET\n";return CLOSE_SQR_BRACKET;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 43 "decaf.l"
-{return OPEN_BRACE;}
+#line 49 "decaf.l"
+{cout<<"OPEN_BRACE\n";return OPEN_BRACE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 44 "decaf.l"
-{return CLOSE_BRACE;}
+#line 51 "decaf.l"
+{cout<<"CLOSE_BRACE\n";return CLOSE_BRACE;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 45 "decaf.l"
-{return NULL_TOKEN;}
+#line 53 "decaf.l"
+{cout<<"NULL_TOKEN\n";return NULL_TOKEN;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 46 "decaf.l"
-{return COMMA;}
+#line 55 "decaf.l"
+{cout<<"COMMA\n";return COMMA;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 47 "decaf.l"
-{return PLUS;}
+#line 57 "decaf.l"
+{cout<<"PLUS\n";return PLUS;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 48 "decaf.l"
-{return MINUS;}
+#line 59 "decaf.l"
+{cout<<"MINUS\n";return MINUS;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 49 "decaf.l"
-{return MULTIPLY;}
+#line 61 "decaf.l"
+{cout<<"MULTIPLY\n";return MULTIPLY;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 50 "decaf.l"
-{return MOD;}
+#line 63 "decaf.l"
+{cout<<"MOD\n";return MOD;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 51 "decaf.l"
-{return DIVIDE;}
+#line 65 "decaf.l"
+{cout<<"DIVIDE\n";return DIVIDE;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 52 "decaf.l"
-{return LESS;}
+#line 67 "decaf.l"
+{cout<<"LESS\n";return LESS;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 53 "decaf.l"
-{return GREATER;}
+#line 69 "decaf.l"
+{cout<<"GREATER\n";return GREATER;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 56 "decaf.l"
-{return IDENTIFIER;}
+#line 71 "decaf.l"
+{cout<<"IDENTIFIER\n";return IDENTIFIER;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 58 "decaf.l"
-{return DECIMAL_LITERAL;}
+#line 73 "decaf.l"
+{cout<<"DECIMAL_LITERAL\n";return DECIMAL_LITERAL;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 60 "decaf.l"
-{return HEX_LITERAL;}
+#line 75 "decaf.l"
+{cout<<"HEX_LITERAL\n";return HEX_LITERAL;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 62 "decaf.l"
-{return ASSIGNMENT_OPERATOR;}
+#line 77 "decaf.l"
+{cout<<"ASSIGNMENT_OPERATOR\n";return ASSIGNMENT_OPERATOR;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 64 "decaf.l"
-{return CHAR_LITERAL;}
+#line 79 "decaf.l"
+{cout<<"CHAR_LITERAL\n";return CHAR_LITERAL;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 66 "decaf.l"
-{return EQUAL_EQUAL;}
+#line 81 "decaf.l"
+{cout<<"EQUAL_EQUAL\n";return EQUAL_EQUAL;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 68 "decaf.l"
-{return LESS_EQUAL;}
+#line 83 "decaf.l"
+{cout<<"LESS_EQUAL\n";return LESS_EQUAL;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 70 "decaf.l"
-{return GREATER_EQUAL;}
+#line 85 "decaf.l"
+{cout<<"GREATER_EQUAL\n";return GREATER_EQUAL;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 72 "decaf.l"
-{return NOT_EQUAL;}
+#line 87 "decaf.l"
+{cout<<"NOT_EQUAL\n";return NOT_EQUAL;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 74 "decaf.l"
-{return OR;}
+#line 89 "decaf.l"
+{cout<<"OR\n";return OR;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 76 "decaf.l"
-{return AND;}
+#line 91 "decaf.l"
+{cout<<"AND\n";return AND;}
 	YY_BREAK
 case 41:
 *yy_cp = yy_hold_char; /* undo effects of setting up yytext */
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 78 "decaf.l"
+#line 93 "decaf.l"
 
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 80 "decaf.l"
+#line 95 "decaf.l"
 
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 82 "decaf.l"
-{return STRING_LITERAL;}
+#line 97 "decaf.l"
+{cout<<"STRING: "<<yytext<<endl;return STRING_LITERAL;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 84 "decaf.l"
+#line 99 "decaf.l"
 {}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 86 "decaf.l"
+#line 101 "decaf.l"
 {}/* discard comments */
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 87 "decaf.l"
+#line 102 "decaf.l"
 {return *yytext;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 89 "decaf.l"
+#line 104 "decaf.l"
 ECHO;
 	YY_BREAK
 #line 1017 "lex.yy.c"
@@ -1897,6 +1897,6 @@ int main()
 	return 0;
 	}
 #endif
-#line 89 "decaf.l"
+#line 104 "decaf.l"
 
 
