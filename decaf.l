@@ -6,7 +6,6 @@
 	#include <string>
 	#include "decaf.tab.h"
 	int yyerror(char *s);
-	
 %}
 %option warn noyywrap noinput nounput yylineno
 %%

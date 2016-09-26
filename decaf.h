@@ -79,7 +79,8 @@
      PLUS = 295,
      MOD = 296,
      DIVIDE = 297,
-     MULTIPLY = 298
+     MULTIPLY = 298,
+     UMINUS = 299
    };
 #endif
 

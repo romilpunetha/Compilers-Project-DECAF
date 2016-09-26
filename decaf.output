@@ -104,27 +104,29 @@ Grammar
    65           | expr MOD expr
    66           | expr PLUS expr
    67           | expr MINUS expr
+   68           | '-' expr
 
-   68 rel_expr: expr LESS expr
-   69         | expr GREATER expr
-   70         | expr LESS_EQUAL expr
-   71         | expr GREATER_EQUAL expr
+   69 rel_expr: expr LESS expr
+   70         | expr GREATER expr
+   71         | expr LESS_EQUAL expr
+   72         | expr GREATER_EQUAL expr
 
-   72 equal_expr: expr EQUAL_EQUAL expr
-   73           | expr NOT_EQUAL expr
+   73 equal_expr: expr EQUAL_EQUAL expr
+   74           | expr NOT_EQUAL expr
 
-   74 condition_expr: expr AND expr
-   75               | expr OR expr
+   75 condition_expr: expr AND expr
+   76               | expr OR expr
 
-   76 callout_arg: /* empty */
-   77            | callout_arg COMMA expr
-   78            | callout_arg COMMA STRING_LITERAL
+   77 callout_arg: /* empty */
+   78            | callout_arg COMMA expr
+   79            | callout_arg COMMA STRING_LITERAL
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
 '!' (33) 47
+'-' (45) 68
 '.' (46)
 '=' (61)
 '[' (91)
@@ -146,7 +148,7 @@ HEX_LITERAL (271) 62
 DECIMAL_LITERAL (272) 61
 CHAR_LITERAL (273) 59
 BOOL_LITERAL (274) 60
-STRING_LITERAL (275) 52 78
+STRING_LITERAL (275) 52 79
 SEMI_COLON (276) 3 20 26 27 30 31 32
 OPEN_PARENTHESES (277) 14 15 36 48 51 52
 CLOSE_PARENTHESES (278) 14 15 36 48 51 52
@@ -155,90 +157,91 @@ CLOSE_SQR_BRACKET (280) 6 9 50
 OPEN_BRACE (281) 1 18
 CLOSE_BRACE (282) 1 18
 NULL_TOKEN (283)
-COMMA (284) 8 9 17 23 29 57 77 78
+COMMA (284) 8 9 17 23 29 57 78 79
 NOT (285)
-OR (286) 75
-AND (287) 74
-NOT_EQUAL (288) 73
-EQUAL_EQUAL (289) 72
-LESS_EQUAL (290) 70
-GREATER_EQUAL (291) 71
-GREATER (292) 69
-LESS (293) 68
+OR (286) 76
+AND (287) 75
+NOT_EQUAL (288) 74
+EQUAL_EQUAL (289) 73
+LESS_EQUAL (290) 71
+GREATER_EQUAL (291) 72
+GREATER (292) 70
+LESS (293) 69
 MINUS (294) 46 67
 PLUS (295) 66
 MOD (296) 65
 DIVIDE (297) 64
 MULTIPLY (298) 63
+UMINUS (299)
 
 
 Nonterminals, with rules where they appear
 
-$accept (48)
+$accept (50)
     on left: 0
-program (49)
+program (51)
     on left: 1, on right: 0
-field_decl_multiple (50)
+field_decl_multiple (52)
     on left: 2 3, on right: 1 3
-field_decl_single (51)
+field_decl_single (53)
     on left: 4, on right: 3
-idList (52)
+idList (54)
     on left: 5 6, on right: 4
-id_single (53)
+id_single (55)
     on left: 7 8 9, on right: 5 6 8 9
-method_decl_multiple (54)
+method_decl_multiple (56)
     on left: 10 11, on right: 1 11
-method_decl_single (55)
+method_decl_single (57)
     on left: 12 13, on right: 11
-argumentList (56)
+argumentList (58)
     on left: 14 15, on right: 12 13
-arg (57)
+arg (59)
     on left: 16 17, on right: 15 17
-block (58)
+block (60)
     on left: 18, on right: 12 13 28 29 33 35
-var_decl_multiple (59)
+var_decl_multiple (61)
     on left: 19 20, on right: 18 20
-var_decl_single (60)
+var_decl_single (62)
     on left: 21, on right: 20
-variableList (61)
+variableList (63)
     on left: 22 23, on right: 21 23
-statement_multiple (62)
+statement_multiple (64)
     on left: 24 25, on right: 18 25
-statement_single (63)
+statement_single (65)
     on left: 26 27 28 29 30 31 32 33, on right: 25
-else_block (64)
+else_block (66)
     on left: 34 35, on right: 28
-condition (65)
+condition (67)
     on left: 36, on right: 28
-return_expr (66)
+return_expr (68)
     on left: 37 38, on right: 30
-expr (67)
+expr (69)
     on left: 39 40 41 42 43 44 45 46 47 48, on right: 26 29 36 38 46
-    47 48 50 55 57 63 64 65 66 67 68 69 70 71 72 73 74 75 77
-location (68)
+    47 48 50 55 57 63 64 65 66 67 68 69 70 71 72 73 74 75 76 78
+location (70)
     on left: 49 50, on right: 26 39
-method_call (69)
+method_call (71)
     on left: 51 52, on right: 27 40
-method_name (70)
+method_name (72)
     on left: 53, on right: 51
-parameterList (71)
+parameterList (73)
     on left: 54 55, on right: 51
-parameter (72)
+parameter (74)
     on left: 56 57, on right: 55 57
-literal (73)
+literal (75)
     on left: 58 59 60, on right: 41
-int_literal (74)
+int_literal (76)
     on left: 61 62, on right: 6 9 58
-arith_expr (75)
-    on left: 63 64 65 66 67, on right: 42
-rel_expr (76)
-    on left: 68 69 70 71, on right: 43
-equal_expr (77)
-    on left: 72 73, on right: 44
-condition_expr (78)
-    on left: 74 75, on right: 45
-callout_arg (79)
-    on left: 76 77 78, on right: 52 77 78
+arith_expr (77)
+    on left: 63 64 65 66 67 68, on right: 42
+rel_expr (78)
+    on left: 69 70 71 72, on right: 43
+equal_expr (79)
+    on left: 73 74, on right: 44
+condition_expr (80)
+    on left: 75 76, on right: 45
+callout_arg (81)
+    on left: 77 78 79, on right: 52 78 79
 
 
 state 0
@@ -747,27 +750,28 @@ state 57
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     $default  reduce using rule 37 (return_expr)
 
-    return_expr     go to state 80
-    expr            go to state 81
-    location        go to state 82
-    method_call     go to state 83
+    return_expr     go to state 81
+    expr            go to state 82
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 58
 
    52 method_call: CALLOUT . OPEN_PARENTHESES STRING_LITERAL callout_arg CLOSE_PARENTHESES
 
-    OPEN_PARENTHESES  shift, and go to state 90
+    OPEN_PARENTHESES  shift, and go to state 91
 
 
 state 59
@@ -776,7 +780,7 @@ state 59
    50         | IDENTIFIER . OPEN_SQR_BRACKET expr CLOSE_SQR_BRACKET
    53 method_name: IDENTIFIER .
 
-    OPEN_SQR_BRACKET  shift, and go to state 91
+    OPEN_SQR_BRACKET  shift, and go to state 92
 
     OPEN_PARENTHESES  reduce using rule 53 (method_name)
     $default          reduce using rule 49 (location)
@@ -807,21 +811,21 @@ state 63
 
    26 statement_single: location . ASSIGNMENT_OPERATOR expr SEMI_COLON
 
-    ASSIGNMENT_OPERATOR  shift, and go to state 92
+    ASSIGNMENT_OPERATOR  shift, and go to state 93
 
 
 state 64
 
    27 statement_single: method_call . SEMI_COLON
 
-    SEMI_COLON  shift, and go to state 93
+    SEMI_COLON  shift, and go to state 94
 
 
 state 65
 
    51 method_call: method_name . OPEN_PARENTHESES parameterList CLOSE_PARENTHESES
 
-    OPEN_PARENTHESES  shift, and go to state 94
+    OPEN_PARENTHESES  shift, and go to state 95
 
 
 state 66
@@ -839,7 +843,7 @@ state 67
 
     $default  reduce using rule 7 (id_single)
 
-    id_single  go to state 95
+    id_single  go to state 96
 
 
 state 68
@@ -850,7 +854,7 @@ state 68
 
     $default  reduce using rule 16 (arg)
 
-    arg  go to state 96
+    arg  go to state 97
 
 
 state 69
@@ -861,14 +865,14 @@ state 69
 
     $default  reduce using rule 22 (variableList)
 
-    variableList  go to state 97
+    variableList  go to state 98
 
 
 state 70
 
    29 statement_single: FOR IDENTIFIER . ASSIGNMENT_OPERATOR expr COMMA expr block
 
-    ASSIGNMENT_OPERATOR  shift, and go to state 98
+    ASSIGNMENT_OPERATOR  shift, and go to state 99
 
 
 state 71
@@ -884,17 +888,18 @@ state 71
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 99
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 100
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 72
@@ -903,7 +908,7 @@ state 72
 
     OPEN_BRACE  shift, and go to state 28
 
-    block  go to state 100
+    block  go to state 101
 
 
 state 73
@@ -947,17 +952,18 @@ state 77
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 101
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 102
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 78
@@ -973,17 +979,18 @@ state 78
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 102
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 103
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 79
@@ -999,27 +1006,55 @@ state 79
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 103
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 104
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 80
 
-   30 statement_single: RETURN return_expr . SEMI_COLON
+   68 arith_expr: '-' . expr
 
-    SEMI_COLON  shift, and go to state 104
+    CALLOUT           shift, and go to state 58
+    IDENTIFIER        shift, and go to state 59
+    HEX_LITERAL       shift, and go to state 30
+    DECIMAL_LITERAL   shift, and go to state 31
+    CHAR_LITERAL      shift, and go to state 75
+    BOOL_LITERAL      shift, and go to state 76
+    OPEN_PARENTHESES  shift, and go to state 77
+    MINUS             shift, and go to state 78
+    '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
+
+    expr            go to state 105
+    location        go to state 83
+    method_call     go to state 84
+    method_name     go to state 65
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 81
+
+   30 statement_single: RETURN return_expr . SEMI_COLON
+
+    SEMI_COLON  shift, and go to state 106
+
+
+state 82
 
    38 return_expr: expr .
    63 arith_expr: expr . MULTIPLY expr
@@ -1027,96 +1062,96 @@ state 81
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    OR             shift, and go to state 105
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    OR             shift, and go to state 107
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
     $default  reduce using rule 38 (return_expr)
 
 
-state 82
+state 83
 
    39 expr: location .
 
     $default  reduce using rule 39 (expr)
 
 
-state 83
+state 84
 
    40 expr: method_call .
 
     $default  reduce using rule 40 (expr)
 
 
-state 84
+state 85
 
    41 expr: literal .
 
     $default  reduce using rule 41 (expr)
 
 
-state 85
+state 86
 
    58 literal: int_literal .
 
     $default  reduce using rule 58 (literal)
 
 
-state 86
+state 87
 
    42 expr: arith_expr .
 
     $default  reduce using rule 42 (expr)
 
 
-state 87
+state 88
 
    43 expr: rel_expr .
 
     $default  reduce using rule 43 (expr)
 
 
-state 88
+state 89
 
    44 expr: equal_expr .
 
     $default  reduce using rule 44 (expr)
 
 
-state 89
+state 90
 
    45 expr: condition_expr .
 
     $default  reduce using rule 45 (expr)
 
 
-state 90
+state 91
 
    52 method_call: CALLOUT OPEN_PARENTHESES . STRING_LITERAL callout_arg CLOSE_PARENTHESES
 
-    STRING_LITERAL  shift, and go to state 118
+    STRING_LITERAL  shift, and go to state 120
 
 
-state 91
+state 92
 
    50 location: IDENTIFIER OPEN_SQR_BRACKET . expr CLOSE_SQR_BRACKET
 
@@ -1129,20 +1164,21 @@ state 91
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 119
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 121
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 92
+state 93
 
    26 statement_single: location ASSIGNMENT_OPERATOR . expr SEMI_COLON
 
@@ -1155,27 +1191,28 @@ state 92
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 120
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 122
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 93
+state 94
 
    27 statement_single: method_call SEMI_COLON .
 
     $default  reduce using rule 27 (statement_single)
 
 
-state 94
+state 95
 
    51 method_call: method_name OPEN_PARENTHESES . parameterList CLOSE_PARENTHESES
 
@@ -1188,44 +1225,45 @@ state 94
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     $default  reduce using rule 54 (parameterList)
 
-    expr            go to state 121
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 123
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    parameterList   go to state 122
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    parameterList   go to state 124
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 95
+state 96
 
     9 id_single: COMMA IDENTIFIER OPEN_SQR_BRACKET int_literal CLOSE_SQR_BRACKET id_single .
 
     $default  reduce using rule 9 (id_single)
 
 
-state 96
+state 97
 
    17 arg: COMMA TYPE IDENTIFIER arg .
 
     $default  reduce using rule 17 (arg)
 
 
-state 97
+state 98
 
    23 variableList: COMMA IDENTIFIER variableList .
 
     $default  reduce using rule 23 (variableList)
 
 
-state 98
+state 99
 
    29 statement_single: FOR IDENTIFIER ASSIGNMENT_OPERATOR . expr COMMA expr block
 
@@ -1238,20 +1276,21 @@ state 98
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 123
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 125
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 99
+state 100
 
    36 condition: OPEN_PARENTHESES expr . CLOSE_PARENTHESES
    63 arith_expr: expr . MULTIPLY expr
@@ -1259,43 +1298,43 @@ state 99
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    CLOSE_PARENTHESES  shift, and go to state 124
-    OR                 shift, and go to state 105
-    AND                shift, and go to state 106
-    NOT_EQUAL          shift, and go to state 107
-    EQUAL_EQUAL        shift, and go to state 108
-    LESS_EQUAL         shift, and go to state 109
-    GREATER_EQUAL      shift, and go to state 110
-    GREATER            shift, and go to state 111
-    LESS               shift, and go to state 112
-    MINUS              shift, and go to state 113
-    PLUS               shift, and go to state 114
-    MOD                shift, and go to state 115
-    DIVIDE             shift, and go to state 116
-    MULTIPLY           shift, and go to state 117
-
-
-state 100
-
-   28 statement_single: IF condition block . else_block
-
-    ELSE  shift, and go to state 125
-
-    $default  reduce using rule 34 (else_block)
-
-    else_block  go to state 126
+    CLOSE_PARENTHESES  shift, and go to state 126
+    OR                 shift, and go to state 107
+    AND                shift, and go to state 108
+    NOT_EQUAL          shift, and go to state 109
+    EQUAL_EQUAL        shift, and go to state 110
+    LESS_EQUAL         shift, and go to state 111
+    GREATER_EQUAL      shift, and go to state 112
+    GREATER            shift, and go to state 113
+    LESS               shift, and go to state 114
+    MINUS              shift, and go to state 115
+    PLUS               shift, and go to state 116
+    MOD                shift, and go to state 117
+    DIVIDE             shift, and go to state 118
+    MULTIPLY           shift, and go to state 119
 
 
 state 101
+
+   28 statement_single: IF condition block . else_block
+
+    ELSE  shift, and go to state 127
+
+    $default  reduce using rule 34 (else_block)
+
+    else_block  go to state 128
+
+
+state 102
 
    48 expr: OPEN_PARENTHESES expr . CLOSE_PARENTHESES
    63 arith_expr: expr . MULTIPLY expr
@@ -1303,32 +1342,32 @@ state 101
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    CLOSE_PARENTHESES  shift, and go to state 127
-    OR                 shift, and go to state 105
-    AND                shift, and go to state 106
-    NOT_EQUAL          shift, and go to state 107
-    EQUAL_EQUAL        shift, and go to state 108
-    LESS_EQUAL         shift, and go to state 109
-    GREATER_EQUAL      shift, and go to state 110
-    GREATER            shift, and go to state 111
-    LESS               shift, and go to state 112
-    MINUS              shift, and go to state 113
-    PLUS               shift, and go to state 114
-    MOD                shift, and go to state 115
-    DIVIDE             shift, and go to state 116
-    MULTIPLY           shift, and go to state 117
+    CLOSE_PARENTHESES  shift, and go to state 129
+    OR                 shift, and go to state 107
+    AND                shift, and go to state 108
+    NOT_EQUAL          shift, and go to state 109
+    EQUAL_EQUAL        shift, and go to state 110
+    LESS_EQUAL         shift, and go to state 111
+    GREATER_EQUAL      shift, and go to state 112
+    GREATER            shift, and go to state 113
+    LESS               shift, and go to state 114
+    MINUS              shift, and go to state 115
+    PLUS               shift, and go to state 116
+    MOD                shift, and go to state 117
+    DIVIDE             shift, and go to state 118
+    MULTIPLY           shift, and go to state 119
 
 
-state 102
+state 103
 
    46 expr: MINUS expr .
    63 arith_expr: expr . MULTIPLY expr
@@ -1336,23 +1375,23 @@ state 102
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    MOD       shift, and go to state 115
-    DIVIDE    shift, and go to state 116
-    MULTIPLY  shift, and go to state 117
+    MOD       shift, and go to state 117
+    DIVIDE    shift, and go to state 118
+    MULTIPLY  shift, and go to state 119
 
     $default  reduce using rule 46 (expr)
 
 
-state 103
+state 104
 
    47 expr: '!' expr .
    63 arith_expr: expr . MULTIPLY expr
@@ -1360,80 +1399,48 @@ state 103
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
     $default  reduce using rule 47 (expr)
 
 
-state 104
+state 105
+
+   63 arith_expr: expr . MULTIPLY expr
+   64           | expr . DIVIDE expr
+   65           | expr . MOD expr
+   66           | expr . PLUS expr
+   67           | expr . MINUS expr
+   68           | '-' expr .
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
+
+    $default  reduce using rule 68 (arith_expr)
+
+
+state 106
 
    30 statement_single: RETURN return_expr SEMI_COLON .
 
     $default  reduce using rule 30 (statement_single)
 
 
-state 105
-
-   75 condition_expr: expr OR . expr
-
-    CALLOUT           shift, and go to state 58
-    IDENTIFIER        shift, and go to state 59
-    HEX_LITERAL       shift, and go to state 30
-    DECIMAL_LITERAL   shift, and go to state 31
-    CHAR_LITERAL      shift, and go to state 75
-    BOOL_LITERAL      shift, and go to state 76
-    OPEN_PARENTHESES  shift, and go to state 77
-    MINUS             shift, and go to state 78
-    '!'               shift, and go to state 79
-
-    expr            go to state 128
-    location        go to state 82
-    method_call     go to state 83
-    method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
-
-
-state 106
-
-   74 condition_expr: expr AND . expr
-
-    CALLOUT           shift, and go to state 58
-    IDENTIFIER        shift, and go to state 59
-    HEX_LITERAL       shift, and go to state 30
-    DECIMAL_LITERAL   shift, and go to state 31
-    CHAR_LITERAL      shift, and go to state 75
-    BOOL_LITERAL      shift, and go to state 76
-    OPEN_PARENTHESES  shift, and go to state 77
-    MINUS             shift, and go to state 78
-    '!'               shift, and go to state 79
-
-    expr            go to state 129
-    location        go to state 82
-    method_call     go to state 83
-    method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
-
-
 state 107
 
-   73 equal_expr: expr NOT_EQUAL . expr
+   76 condition_expr: expr OR . expr
 
     CALLOUT           shift, and go to state 58
     IDENTIFIER        shift, and go to state 59
@@ -1444,22 +1451,23 @@ state 107
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     expr            go to state 130
-    location        go to state 82
-    method_call     go to state 83
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 108
 
-   72 equal_expr: expr EQUAL_EQUAL . expr
+   75 condition_expr: expr AND . expr
 
     CALLOUT           shift, and go to state 58
     IDENTIFIER        shift, and go to state 59
@@ -1470,22 +1478,23 @@ state 108
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     expr            go to state 131
-    location        go to state 82
-    method_call     go to state 83
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 109
 
-   70 rel_expr: expr LESS_EQUAL . expr
+   74 equal_expr: expr NOT_EQUAL . expr
 
     CALLOUT           shift, and go to state 58
     IDENTIFIER        shift, and go to state 59
@@ -1496,22 +1505,23 @@ state 109
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     expr            go to state 132
-    location        go to state 82
-    method_call     go to state 83
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 110
 
-   71 rel_expr: expr GREATER_EQUAL . expr
+   73 equal_expr: expr EQUAL_EQUAL . expr
 
     CALLOUT           shift, and go to state 58
     IDENTIFIER        shift, and go to state 59
@@ -1522,22 +1532,23 @@ state 110
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     expr            go to state 133
-    location        go to state 82
-    method_call     go to state 83
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 111
 
-   69 rel_expr: expr GREATER . expr
+   71 rel_expr: expr LESS_EQUAL . expr
 
     CALLOUT           shift, and go to state 58
     IDENTIFIER        shift, and go to state 59
@@ -1548,22 +1559,23 @@ state 111
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     expr            go to state 134
-    location        go to state 82
-    method_call     go to state 83
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 112
 
-   68 rel_expr: expr LESS . expr
+   72 rel_expr: expr GREATER_EQUAL . expr
 
     CALLOUT           shift, and go to state 58
     IDENTIFIER        shift, and go to state 59
@@ -1574,20 +1586,75 @@ state 112
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
     expr            go to state 135
-    location        go to state 82
-    method_call     go to state 83
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
 state 113
+
+   70 rel_expr: expr GREATER . expr
+
+    CALLOUT           shift, and go to state 58
+    IDENTIFIER        shift, and go to state 59
+    HEX_LITERAL       shift, and go to state 30
+    DECIMAL_LITERAL   shift, and go to state 31
+    CHAR_LITERAL      shift, and go to state 75
+    BOOL_LITERAL      shift, and go to state 76
+    OPEN_PARENTHESES  shift, and go to state 77
+    MINUS             shift, and go to state 78
+    '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
+
+    expr            go to state 136
+    location        go to state 83
+    method_call     go to state 84
+    method_name     go to state 65
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
+
+
+state 114
+
+   69 rel_expr: expr LESS . expr
+
+    CALLOUT           shift, and go to state 58
+    IDENTIFIER        shift, and go to state 59
+    HEX_LITERAL       shift, and go to state 30
+    DECIMAL_LITERAL   shift, and go to state 31
+    CHAR_LITERAL      shift, and go to state 75
+    BOOL_LITERAL      shift, and go to state 76
+    OPEN_PARENTHESES  shift, and go to state 77
+    MINUS             shift, and go to state 78
+    '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
+
+    expr            go to state 137
+    location        go to state 83
+    method_call     go to state 84
+    method_name     go to state 65
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
+
+
+state 115
 
    67 arith_expr: expr MINUS . expr
 
@@ -1600,20 +1667,21 @@ state 113
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 136
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 138
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 114
+state 116
 
    66 arith_expr: expr PLUS . expr
 
@@ -1626,20 +1694,21 @@ state 114
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 137
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 139
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 115
+state 117
 
    65 arith_expr: expr MOD . expr
 
@@ -1652,20 +1721,21 @@ state 115
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 138
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 140
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 116
+state 118
 
    64 arith_expr: expr DIVIDE . expr
 
@@ -1678,20 +1748,21 @@ state 116
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 139
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 141
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 117
+state 119
 
    63 arith_expr: expr MULTIPLY . expr
 
@@ -1704,29 +1775,30 @@ state 117
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 140
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 142
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 118
+state 120
 
    52 method_call: CALLOUT OPEN_PARENTHESES STRING_LITERAL . callout_arg CLOSE_PARENTHESES
 
-    $default  reduce using rule 76 (callout_arg)
+    $default  reduce using rule 77 (callout_arg)
 
-    callout_arg  go to state 141
+    callout_arg  go to state 143
 
 
-state 119
+state 121
 
    50 location: IDENTIFIER OPEN_SQR_BRACKET expr . CLOSE_SQR_BRACKET
    63 arith_expr: expr . MULTIPLY expr
@@ -1734,32 +1806,32 @@ state 119
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    CLOSE_SQR_BRACKET  shift, and go to state 142
-    OR                 shift, and go to state 105
-    AND                shift, and go to state 106
-    NOT_EQUAL          shift, and go to state 107
-    EQUAL_EQUAL        shift, and go to state 108
-    LESS_EQUAL         shift, and go to state 109
-    GREATER_EQUAL      shift, and go to state 110
-    GREATER            shift, and go to state 111
-    LESS               shift, and go to state 112
-    MINUS              shift, and go to state 113
-    PLUS               shift, and go to state 114
-    MOD                shift, and go to state 115
-    DIVIDE             shift, and go to state 116
-    MULTIPLY           shift, and go to state 117
+    CLOSE_SQR_BRACKET  shift, and go to state 144
+    OR                 shift, and go to state 107
+    AND                shift, and go to state 108
+    NOT_EQUAL          shift, and go to state 109
+    EQUAL_EQUAL        shift, and go to state 110
+    LESS_EQUAL         shift, and go to state 111
+    GREATER_EQUAL      shift, and go to state 112
+    GREATER            shift, and go to state 113
+    LESS               shift, and go to state 114
+    MINUS              shift, and go to state 115
+    PLUS               shift, and go to state 116
+    MOD                shift, and go to state 117
+    DIVIDE             shift, and go to state 118
+    MULTIPLY           shift, and go to state 119
 
 
-state 120
+state 122
 
    26 statement_single: location ASSIGNMENT_OPERATOR expr . SEMI_COLON
    63 arith_expr: expr . MULTIPLY expr
@@ -1767,32 +1839,32 @@ state 120
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    SEMI_COLON     shift, and go to state 143
-    OR             shift, and go to state 105
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    SEMI_COLON     shift, and go to state 145
+    OR             shift, and go to state 107
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
 
-state 121
+state 123
 
    55 parameterList: expr . parameter
    63 arith_expr: expr . MULTIPLY expr
@@ -1800,43 +1872,43 @@ state 121
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    COMMA          shift, and go to state 144
-    OR             shift, and go to state 105
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    COMMA          shift, and go to state 146
+    OR             shift, and go to state 107
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
     $default  reduce using rule 56 (parameter)
 
-    parameter  go to state 145
+    parameter  go to state 147
 
 
-state 122
+state 124
 
    51 method_call: method_name OPEN_PARENTHESES parameterList . CLOSE_PARENTHESES
 
-    CLOSE_PARENTHESES  shift, and go to state 146
+    CLOSE_PARENTHESES  shift, and go to state 148
 
 
-state 123
+state 125
 
    29 statement_single: FOR IDENTIFIER ASSIGNMENT_OPERATOR expr . COMMA expr block
    63 arith_expr: expr . MULTIPLY expr
@@ -1844,124 +1916,59 @@ state 123
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    COMMA          shift, and go to state 147
-    OR             shift, and go to state 105
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    COMMA          shift, and go to state 149
+    OR             shift, and go to state 107
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
 
-state 124
+state 126
 
    36 condition: OPEN_PARENTHESES expr CLOSE_PARENTHESES .
 
     $default  reduce using rule 36 (condition)
 
 
-state 125
+state 127
 
    35 else_block: ELSE . block
 
     OPEN_BRACE  shift, and go to state 28
 
-    block  go to state 148
+    block  go to state 150
 
 
-state 126
+state 128
 
    28 statement_single: IF condition block else_block .
 
     $default  reduce using rule 28 (statement_single)
 
 
-state 127
+state 129
 
    48 expr: OPEN_PARENTHESES expr CLOSE_PARENTHESES .
 
     $default  reduce using rule 48 (expr)
-
-
-state 128
-
-   63 arith_expr: expr . MULTIPLY expr
-   64           | expr . DIVIDE expr
-   65           | expr . MOD expr
-   66           | expr . PLUS expr
-   67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
-   75               | expr OR expr .
-
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
-
-    $default  reduce using rule 75 (condition_expr)
-
-
-state 129
-
-   63 arith_expr: expr . MULTIPLY expr
-   64           | expr . DIVIDE expr
-   65           | expr . MOD expr
-   66           | expr . PLUS expr
-   67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   74               | expr AND expr .
-   75               | expr . OR expr
-
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
-
-    $default  reduce using rule 74 (condition_expr)
 
 
 state 130
@@ -1971,30 +1978,30 @@ state 130
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   73           | expr NOT_EQUAL expr .
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
+   76               | expr OR expr .
 
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
-    NOT_EQUAL    error (nonassociative)
-    EQUAL_EQUAL  error (nonassociative)
-
-    $default  reduce using rule 73 (equal_expr)
+    $default  reduce using rule 76 (condition_expr)
 
 
 state 131
@@ -2004,30 +2011,29 @@ state 131
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   72           | expr EQUAL_EQUAL expr .
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   75               | expr AND expr .
+   76               | expr . OR expr
 
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
-    NOT_EQUAL    error (nonassociative)
-    EQUAL_EQUAL  error (nonassociative)
-
-    $default  reduce using rule 72 (equal_expr)
+    $default  reduce using rule 75 (condition_expr)
 
 
 state 132
@@ -2037,28 +2043,30 @@ state 132
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   70         | expr LESS_EQUAL expr .
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   74           | expr NOT_EQUAL expr .
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    MINUS     shift, and go to state 113
-    PLUS      shift, and go to state 114
-    MOD       shift, and go to state 115
-    DIVIDE    shift, and go to state 116
-    MULTIPLY  shift, and go to state 117
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
-    LESS_EQUAL     error (nonassociative)
-    GREATER_EQUAL  error (nonassociative)
-    GREATER        error (nonassociative)
-    LESS           error (nonassociative)
+    NOT_EQUAL    error (nonassociative)
+    EQUAL_EQUAL  error (nonassociative)
 
-    $default  reduce using rule 70 (rel_expr)
+    $default  reduce using rule 74 (equal_expr)
 
 
 state 133
@@ -2068,28 +2076,30 @@ state 133
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   71         | expr GREATER_EQUAL expr .
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   73           | expr EQUAL_EQUAL expr .
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    MINUS     shift, and go to state 113
-    PLUS      shift, and go to state 114
-    MOD       shift, and go to state 115
-    DIVIDE    shift, and go to state 116
-    MULTIPLY  shift, and go to state 117
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
-    LESS_EQUAL     error (nonassociative)
-    GREATER_EQUAL  error (nonassociative)
-    GREATER        error (nonassociative)
-    LESS           error (nonassociative)
+    NOT_EQUAL    error (nonassociative)
+    EQUAL_EQUAL  error (nonassociative)
 
-    $default  reduce using rule 71 (rel_expr)
+    $default  reduce using rule 73 (equal_expr)
 
 
 state 134
@@ -2099,28 +2109,28 @@ state 134
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   69         | expr GREATER expr .
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   71         | expr LESS_EQUAL expr .
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    MINUS     shift, and go to state 113
-    PLUS      shift, and go to state 114
-    MOD       shift, and go to state 115
-    DIVIDE    shift, and go to state 116
-    MULTIPLY  shift, and go to state 117
+    MINUS     shift, and go to state 115
+    PLUS      shift, and go to state 116
+    MOD       shift, and go to state 117
+    DIVIDE    shift, and go to state 118
+    MULTIPLY  shift, and go to state 119
 
     LESS_EQUAL     error (nonassociative)
     GREATER_EQUAL  error (nonassociative)
     GREATER        error (nonassociative)
     LESS           error (nonassociative)
 
-    $default  reduce using rule 69 (rel_expr)
+    $default  reduce using rule 71 (rel_expr)
 
 
 state 135
@@ -2130,28 +2140,28 @@ state 135
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   68         | expr LESS expr .
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   72         | expr GREATER_EQUAL expr .
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    MINUS     shift, and go to state 113
-    PLUS      shift, and go to state 114
-    MOD       shift, and go to state 115
-    DIVIDE    shift, and go to state 116
-    MULTIPLY  shift, and go to state 117
+    MINUS     shift, and go to state 115
+    PLUS      shift, and go to state 116
+    MOD       shift, and go to state 117
+    DIVIDE    shift, and go to state 118
+    MULTIPLY  shift, and go to state 119
 
     LESS_EQUAL     error (nonassociative)
     GREATER_EQUAL  error (nonassociative)
     GREATER        error (nonassociative)
     LESS           error (nonassociative)
 
-    $default  reduce using rule 68 (rel_expr)
+    $default  reduce using rule 72 (rel_expr)
 
 
 state 136
@@ -2161,21 +2171,28 @@ state 136
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   67           | expr MINUS expr .
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   70         | expr GREATER expr .
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    MOD       shift, and go to state 115
-    DIVIDE    shift, and go to state 116
-    MULTIPLY  shift, and go to state 117
+    MINUS     shift, and go to state 115
+    PLUS      shift, and go to state 116
+    MOD       shift, and go to state 117
+    DIVIDE    shift, and go to state 118
+    MULTIPLY  shift, and go to state 119
 
-    $default  reduce using rule 67 (arith_expr)
+    LESS_EQUAL     error (nonassociative)
+    GREATER_EQUAL  error (nonassociative)
+    GREATER        error (nonassociative)
+    LESS           error (nonassociative)
+
+    $default  reduce using rule 70 (rel_expr)
 
 
 state 137
@@ -2184,22 +2201,29 @@ state 137
    64           | expr . DIVIDE expr
    65           | expr . MOD expr
    66           | expr . PLUS expr
-   66           | expr PLUS expr .
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   69         | expr LESS expr .
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    MOD       shift, and go to state 115
-    DIVIDE    shift, and go to state 116
-    MULTIPLY  shift, and go to state 117
+    MINUS     shift, and go to state 115
+    PLUS      shift, and go to state 116
+    MOD       shift, and go to state 117
+    DIVIDE    shift, and go to state 118
+    MULTIPLY  shift, and go to state 119
 
-    $default  reduce using rule 66 (arith_expr)
+    LESS_EQUAL     error (nonassociative)
+    GREATER_EQUAL  error (nonassociative)
+    GREATER        error (nonassociative)
+    LESS           error (nonassociative)
+
+    $default  reduce using rule 69 (rel_expr)
 
 
 state 138
@@ -2207,22 +2231,70 @@ state 138
    63 arith_expr: expr . MULTIPLY expr
    64           | expr . DIVIDE expr
    65           | expr . MOD expr
+   66           | expr . PLUS expr
+   67           | expr . MINUS expr
+   67           | expr MINUS expr .
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
+
+    MOD       shift, and go to state 117
+    DIVIDE    shift, and go to state 118
+    MULTIPLY  shift, and go to state 119
+
+    $default  reduce using rule 67 (arith_expr)
+
+
+state 139
+
+   63 arith_expr: expr . MULTIPLY expr
+   64           | expr . DIVIDE expr
+   65           | expr . MOD expr
+   66           | expr . PLUS expr
+   66           | expr PLUS expr .
+   67           | expr . MINUS expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
+
+    MOD       shift, and go to state 117
+    DIVIDE    shift, and go to state 118
+    MULTIPLY  shift, and go to state 119
+
+    $default  reduce using rule 66 (arith_expr)
+
+
+state 140
+
+   63 arith_expr: expr . MULTIPLY expr
+   64           | expr . DIVIDE expr
+   65           | expr . MOD expr
    65           | expr MOD expr .
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
     $default  reduce using rule 65 (arith_expr)
 
 
-state 139
+state 141
 
    63 arith_expr: expr . MULTIPLY expr
    64           | expr . DIVIDE expr
@@ -2230,19 +2302,19 @@ state 139
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
     $default  reduce using rule 64 (arith_expr)
 
 
-state 140
+state 142
 
    63 arith_expr: expr . MULTIPLY expr
    63           | expr MULTIPLY expr .
@@ -2250,43 +2322,43 @@ state 140
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
     $default  reduce using rule 63 (arith_expr)
 
 
-state 141
+state 143
 
    52 method_call: CALLOUT OPEN_PARENTHESES STRING_LITERAL callout_arg . CLOSE_PARENTHESES
-   77 callout_arg: callout_arg . COMMA expr
-   78            | callout_arg . COMMA STRING_LITERAL
+   78 callout_arg: callout_arg . COMMA expr
+   79            | callout_arg . COMMA STRING_LITERAL
 
-    CLOSE_PARENTHESES  shift, and go to state 149
-    COMMA              shift, and go to state 150
+    CLOSE_PARENTHESES  shift, and go to state 151
+    COMMA              shift, and go to state 152
 
 
-state 142
+state 144
 
    50 location: IDENTIFIER OPEN_SQR_BRACKET expr CLOSE_SQR_BRACKET .
 
     $default  reduce using rule 50 (location)
 
 
-state 143
+state 145
 
    26 statement_single: location ASSIGNMENT_OPERATOR expr SEMI_COLON .
 
     $default  reduce using rule 26 (statement_single)
 
 
-state 144
+state 146
 
    57 parameter: COMMA . expr parameter
 
@@ -2299,34 +2371,35 @@ state 144
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 151
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 153
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 145
+state 147
 
    55 parameterList: expr parameter .
 
     $default  reduce using rule 55 (parameterList)
 
 
-state 146
+state 148
 
    51 method_call: method_name OPEN_PARENTHESES parameterList CLOSE_PARENTHESES .
 
     $default  reduce using rule 51 (method_call)
 
 
-state 147
+state 149
 
    29 statement_single: FOR IDENTIFIER ASSIGNMENT_OPERATOR expr COMMA . expr block
 
@@ -2339,37 +2412,38 @@ state 147
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 152
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 154
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 148
+state 150
 
    35 else_block: ELSE block .
 
     $default  reduce using rule 35 (else_block)
 
 
-state 149
+state 151
 
    52 method_call: CALLOUT OPEN_PARENTHESES STRING_LITERAL callout_arg CLOSE_PARENTHESES .
 
     $default  reduce using rule 52 (method_call)
 
 
-state 150
+state 152
 
-   77 callout_arg: callout_arg COMMA . expr
-   78            | callout_arg COMMA . STRING_LITERAL
+   78 callout_arg: callout_arg COMMA . expr
+   79            | callout_arg COMMA . STRING_LITERAL
 
     CALLOUT           shift, and go to state 58
     IDENTIFIER        shift, and go to state 59
@@ -2377,24 +2451,25 @@ state 150
     DECIMAL_LITERAL   shift, and go to state 31
     CHAR_LITERAL      shift, and go to state 75
     BOOL_LITERAL      shift, and go to state 76
-    STRING_LITERAL    shift, and go to state 153
+    STRING_LITERAL    shift, and go to state 155
     OPEN_PARENTHESES  shift, and go to state 77
     MINUS             shift, and go to state 78
     '!'               shift, and go to state 79
+    '-'               shift, and go to state 80
 
-    expr            go to state 154
-    location        go to state 82
-    method_call     go to state 83
+    expr            go to state 156
+    location        go to state 83
+    method_call     go to state 84
     method_name     go to state 65
-    literal         go to state 84
-    int_literal     go to state 85
-    arith_expr      go to state 86
-    rel_expr        go to state 87
-    equal_expr      go to state 88
-    condition_expr  go to state 89
+    literal         go to state 85
+    int_literal     go to state 86
+    arith_expr      go to state 87
+    rel_expr        go to state 88
+    equal_expr      go to state 89
+    condition_expr  go to state 90
 
 
-state 151
+state 153
 
    57 parameter: COMMA expr . parameter
    63 arith_expr: expr . MULTIPLY expr
@@ -2402,36 +2477,36 @@ state 151
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
-    COMMA          shift, and go to state 144
-    OR             shift, and go to state 105
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    COMMA          shift, and go to state 146
+    OR             shift, and go to state 107
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
     $default  reduce using rule 56 (parameter)
 
-    parameter  go to state 155
+    parameter  go to state 157
 
 
-state 152
+state 154
 
    29 statement_single: FOR IDENTIFIER ASSIGNMENT_OPERATOR expr COMMA expr . block
    63 arith_expr: expr . MULTIPLY expr
@@ -2439,82 +2514,82 @@ state 152
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
 
     OPEN_BRACE     shift, and go to state 28
-    OR             shift, and go to state 105
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    OR             shift, and go to state 107
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
-    block  go to state 156
-
-
-state 153
-
-   78 callout_arg: callout_arg COMMA STRING_LITERAL .
-
-    $default  reduce using rule 78 (callout_arg)
+    block  go to state 158
 
 
-state 154
+state 155
+
+   79 callout_arg: callout_arg COMMA STRING_LITERAL .
+
+    $default  reduce using rule 79 (callout_arg)
+
+
+state 156
 
    63 arith_expr: expr . MULTIPLY expr
    64           | expr . DIVIDE expr
    65           | expr . MOD expr
    66           | expr . PLUS expr
    67           | expr . MINUS expr
-   68 rel_expr: expr . LESS expr
-   69         | expr . GREATER expr
-   70         | expr . LESS_EQUAL expr
-   71         | expr . GREATER_EQUAL expr
-   72 equal_expr: expr . EQUAL_EQUAL expr
-   73           | expr . NOT_EQUAL expr
-   74 condition_expr: expr . AND expr
-   75               | expr . OR expr
-   77 callout_arg: callout_arg COMMA expr .
+   69 rel_expr: expr . LESS expr
+   70         | expr . GREATER expr
+   71         | expr . LESS_EQUAL expr
+   72         | expr . GREATER_EQUAL expr
+   73 equal_expr: expr . EQUAL_EQUAL expr
+   74           | expr . NOT_EQUAL expr
+   75 condition_expr: expr . AND expr
+   76               | expr . OR expr
+   78 callout_arg: callout_arg COMMA expr .
 
-    OR             shift, and go to state 105
-    AND            shift, and go to state 106
-    NOT_EQUAL      shift, and go to state 107
-    EQUAL_EQUAL    shift, and go to state 108
-    LESS_EQUAL     shift, and go to state 109
-    GREATER_EQUAL  shift, and go to state 110
-    GREATER        shift, and go to state 111
-    LESS           shift, and go to state 112
-    MINUS          shift, and go to state 113
-    PLUS           shift, and go to state 114
-    MOD            shift, and go to state 115
-    DIVIDE         shift, and go to state 116
-    MULTIPLY       shift, and go to state 117
+    OR             shift, and go to state 107
+    AND            shift, and go to state 108
+    NOT_EQUAL      shift, and go to state 109
+    EQUAL_EQUAL    shift, and go to state 110
+    LESS_EQUAL     shift, and go to state 111
+    GREATER_EQUAL  shift, and go to state 112
+    GREATER        shift, and go to state 113
+    LESS           shift, and go to state 114
+    MINUS          shift, and go to state 115
+    PLUS           shift, and go to state 116
+    MOD            shift, and go to state 117
+    DIVIDE         shift, and go to state 118
+    MULTIPLY       shift, and go to state 119
 
-    $default  reduce using rule 77 (callout_arg)
+    $default  reduce using rule 78 (callout_arg)
 
 
-state 155
+state 157
 
    57 parameter: COMMA expr parameter .
 
     $default  reduce using rule 57 (parameter)
 
 
-state 156
+state 158
 
    29 statement_single: FOR IDENTIFIER ASSIGNMENT_OPERATOR expr COMMA expr block .
 

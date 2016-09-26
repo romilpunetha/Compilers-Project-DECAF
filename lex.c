@@ -528,10 +528,9 @@ char *yytext;
 	#include <string>
 	#include "decaf.tab.h"
 	int yyerror(char *s);
-	
 #define YY_NO_INPUT 1
 #define YY_NO_UNPUT 1
-#line 535 "lex.yy.c"
+#line 534 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -682,10 +681,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 12 "decaf.l"
+#line 11 "decaf.l"
 
 
-#line 689 "lex.yy.c"
+#line 688 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -778,202 +777,202 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 YY_RULE_SETUP
-#line 14 "decaf.l"
+#line 13 "decaf.l"
 {return CLASS;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "decaf.l"
+#line 15 "decaf.l"
 {return PROGRAM;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "decaf.l"
+#line 17 "decaf.l"
 {return TYPE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "decaf.l"
+#line 19 "decaf.l"
 {return VOID;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 22 "decaf.l"
+#line 21 "decaf.l"
 {return BOOL_LITERAL;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 24 "decaf.l"
+#line 23 "decaf.l"
 {return BOOL_LITERAL;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 26 "decaf.l"
+#line 25 "decaf.l"
 {return FOR;} 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 28 "decaf.l"
+#line 27 "decaf.l"
 {return IF;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 30 "decaf.l"
+#line 29 "decaf.l"
 {return ELSE;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 32 "decaf.l"
+#line 31 "decaf.l"
 {return BREAK;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 34 "decaf.l"
+#line 33 "decaf.l"
 {return CONTINUE;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 36 "decaf.l"
+#line 35 "decaf.l"
 {return RETURN;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 38 "decaf.l"
+#line 37 "decaf.l"
 {return CALLOUT;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 39 "decaf.l"
+#line 38 "decaf.l"
 {return SEMI_COLON;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 40 "decaf.l"
+#line 39 "decaf.l"
 {return OPEN_PARENTHESES ;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 41 "decaf.l"
+#line 40 "decaf.l"
 {return CLOSE_PARENTHESES;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 42 "decaf.l"
+#line 41 "decaf.l"
 {return OPEN_SQR_BRACKET;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 43 "decaf.l"
+#line 42 "decaf.l"
 {return CLOSE_SQR_BRACKET;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 44 "decaf.l"
+#line 43 "decaf.l"
 {return OPEN_BRACE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 45 "decaf.l"
+#line 44 "decaf.l"
 {return CLOSE_BRACE;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 46 "decaf.l"
+#line 45 "decaf.l"
 {return NULL_TOKEN;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 47 "decaf.l"
+#line 46 "decaf.l"
 {return COMMA;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 48 "decaf.l"
+#line 47 "decaf.l"
 {return PLUS;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 49 "decaf.l"
+#line 48 "decaf.l"
 {return MINUS;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 50 "decaf.l"
+#line 49 "decaf.l"
 {return MULTIPLY;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 51 "decaf.l"
+#line 50 "decaf.l"
 {return MOD;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 52 "decaf.l"
+#line 51 "decaf.l"
 {return DIVIDE;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 53 "decaf.l"
+#line 52 "decaf.l"
 {return LESS;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 54 "decaf.l"
+#line 53 "decaf.l"
 {return GREATER;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 57 "decaf.l"
+#line 56 "decaf.l"
 {return IDENTIFIER;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 59 "decaf.l"
+#line 58 "decaf.l"
 {return DECIMAL_LITERAL;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 61 "decaf.l"
+#line 60 "decaf.l"
 {return HEX_LITERAL;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 63 "decaf.l"
+#line 62 "decaf.l"
 {return ASSIGNMENT_OPERATOR;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 65 "decaf.l"
+#line 64 "decaf.l"
 {return CHAR_LITERAL;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 67 "decaf.l"
+#line 66 "decaf.l"
 {return EQUAL_EQUAL;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 69 "decaf.l"
+#line 68 "decaf.l"
 {return LESS_EQUAL;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 71 "decaf.l"
+#line 70 "decaf.l"
 {return GREATER_EQUAL;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 73 "decaf.l"
+#line 72 "decaf.l"
 {return NOT_EQUAL;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 75 "decaf.l"
+#line 74 "decaf.l"
 {return OR;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 77 "decaf.l"
+#line 76 "decaf.l"
 {return AND;}
 	YY_BREAK
 case 41:
@@ -981,40 +980,40 @@ case 41:
 yy_c_buf_p = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 79 "decaf.l"
+#line 78 "decaf.l"
 
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 81 "decaf.l"
+#line 80 "decaf.l"
 
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 83 "decaf.l"
+#line 82 "decaf.l"
 {return STRING_LITERAL;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 85 "decaf.l"
+#line 84 "decaf.l"
 {}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 87 "decaf.l"
+#line 86 "decaf.l"
 {}/* discard comments */
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 88 "decaf.l"
+#line 87 "decaf.l"
 {return *yytext;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 90 "decaf.l"
+#line 89 "decaf.l"
 ECHO;
 	YY_BREAK
-#line 1018 "lex.yy.c"
+#line 1017 "lex.yy.c"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1898,6 +1897,6 @@ int main()
 	return 0;
 	}
 #endif
-#line 90 "decaf.l"
+#line 89 "decaf.l"
 
 

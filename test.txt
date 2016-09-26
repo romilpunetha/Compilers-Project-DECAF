@@ -1,6 +1,7 @@
 class Program {
-int a,b,c;
-a=10;
-b=20;
-c=a+b;
+int a(int b){
+int f,g;
+f=10;
+g=f;
+}
 }
