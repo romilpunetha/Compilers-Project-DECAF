@@ -1,10 +1,10 @@
 %{ 
 	#define YY_NO_UNPUT
-	using namespace std;
 	#include <iostream>
 	#include <stdio.h>
 	#include <string>
 	#include "decaf.tab.h"
+	using namespace std;
 	int yyerror(char *s);
 %}
 %option warn noyywrap noinput nounput yylineno
@@ -99,6 +99,7 @@
 [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/] 	{}
 
 "//".*		  {}/* discard comments */
+
 .	                        			{return *yytext;}
 
 %%

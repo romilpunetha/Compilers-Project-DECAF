@@ -17,8 +17,7 @@ int main(int argc, char **argv){
 	int a =yyparse();
     if(!a) fprintf(stderr,"Lexical Analysis - Success\n");
    	else fprintf(stderr,"Lexical Analysis - Error\n");
-	yyparse();
-	cout << "Success\n";
+	cerr << "Parsing - Success\n";
   return 0;
 }
 

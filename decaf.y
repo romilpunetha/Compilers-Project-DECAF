@@ -9,9 +9,10 @@ using namespace std;
 int yyerror(char *s);
 int yylex(void);
 string * temp;
-int tempSize,inte;
-FILE * fp= fopen ("test_output.txt", "w");
+FILE * fp= fopen ("bison_output.txt", "w");
 %}
+
+
 
 %token CLASS
 %token PROGRAM
@@ -59,6 +60,7 @@ FILE * fp= fopen ("test_output.txt", "w");
 
 
 program: 					CLASS PROGRAM  OPEN_BRACE field_decl_multiple method_decl_multiple CLOSE_BRACE
+						;
 																		
 field_decl_multiple:		/*epsilon*/  				                
 							|field_decl_multiple field_decl_single SEMI_COLON 	
@@ -203,9 +205,8 @@ callout_arg:			    /*epsilon*/
 
 int yyerror(string s)
 {
-  extern int yylineno;	// defined and MAINtained in lex.c
-  extern char *yytext;	// defined and MAINtained in lex.c
-  
+  extern int yylineno;
+  extern char *yytext;
   cerr << "ERROR: " << s << " at symbol \"" << yytext;
   cerr << "\" on line " << yylineno << endl;
   cerr << "Syntax error\n";
