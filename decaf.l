@@ -14,7 +14,9 @@
 
 "Program" 								{cout<<"PROGRAM\n";return PROGRAM;}
 
-"int"|"boolean"							{cout<<"TYPE\n";return TYPE;}
+"int"									{cout<<"INT\n";return INT;}
+
+"boolean"								{cout<<"BOOL\n";return BOOL;}
 
 "void"									{cout<<"VOID\n";return VOID;}
 
