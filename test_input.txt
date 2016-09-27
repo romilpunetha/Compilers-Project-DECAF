@@ -1,6 +1,11 @@
 class Program {
-int a(int b){
-int f;
+int abcd,efgh,a[10];
+int a(int a1,int a2){
+int a,b,c,d;
+c=2*3;
 f=10;
+}
+void f2(int k){
+int a;
 }
 }

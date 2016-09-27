@@ -60,35 +60,46 @@ FILE * fp= fopen ("bison_output.txt", "w");
 
 
 program: 					CLASS PROGRAM  OPEN_BRACE field_decl_multiple method_decl_multiple CLOSE_BRACE
-						{fprintf(fp,"PROGRAM ENCOUNTERED\n");}
-						;
+							{fprintf(fp,"PROGRAM ENCOUNTERED\n");}
+							;
 																		
 field_decl_multiple:				/*epsilon*/  				                
-						|field_decl_multiple field_decl_single SEMI_COLON 	
-						;
+							|field_decl_multiple field_decl_single SEMI_COLON 	
+							;
 
-field_decl_single: 				type idList
-						;
+field_decl_single: 			type idList
+							;
 
-type: 					INT {flag=1;}
-						| BOOL{flag=0;} 
-						;
-idList:                     			IDENTIFIER id_single  
-						{
-						t_size=0;
-						
-						if(flag)fprintf(fp,"INT DECLARATION ENCOUNTERED 1 \n");
-						else if(flag==0)fprintf(fp,"BOOLEAN DECLARATION ENCOUNTERED 1\n");
-						fprintf(fp,"ID=%s\n",$1);
-						if(t_size!=0)fprintf(fp,"SIZE=%d\n",t_size);						
-						}                      
-                        |IDENTIFIER OPEN_SQR_BRACKET int_literal CLOSE_SQR_BRACKET id_single {t_size=$3} 
-						;
+type: 						INT {flag=1;}
+							| BOOL{flag=0;} 
+							;
+idList:                 	IDENTIFIER id_single  
+							{
+							
+							if(flag)fprintf(fp,"INT DECLARATION ENCOUNTERED \n");
+							else if(flag==0)fprintf(fp,"BOOLEAN DECLARATION ENCOUNTERED \n");
+							fprintf(fp,"ID=%s\n",$1);
+							if(t_size!=0)fprintf(fp,"SIZE=%d\n",t_size);						
+							}                      
+							|IDENTIFIER OPEN_SQR_BRACKET int_literal CLOSE_SQR_BRACKET id_single {
+							if(flag)fprintf(fp,"INT DECLARATION ENCOUNTERED \n");
+							else if(flag==0)fprintf(fp,"BOOLEAN DECLARATION ENCOUNTERED \n");
+							fprintf(fp,"ID=%s\n",$1);
+							fprintf(fp,"Size=%d\n",$3);
+							} 
+							;
 							
 id_single: 					/*epsilon*/  								
-						|COMMA IDENTIFIER id_single 					
-						|COMMA IDENTIFIER OPEN_SQR_BRACKET int_literal CLOSE_SQR_BRACKET id_single		
-						;
+							|COMMA IDENTIFIER id_single
+							{fprintf(fp,"ID=%s\n",$2);
+							}
+							|COMMA IDENTIFIER OPEN_SQR_BRACKET int_literal CLOSE_SQR_BRACKET id_single
+							{
+							fprintf(fp,"ID=%s\n",$2);
+							fprintf(fp,"Size=%d\n",$4);
+							
+							}
+							;
 							
 						
 method_decl_multiple:				/*epsilon*/ 								
@@ -101,13 +112,19 @@ method_decl_single: 				type IDENTIFIER argumentList block
 						else if(flag==0)fprintf(fp,"METHOD WITH RETURN TYPE BOOLEAN ENCOUNTERED\n");
 						fprintf(fp,"METHOD NAME: %s\n",$2);
 						}
-                            			|VOID IDENTIFIER argumentList block 
+                          |VOID IDENTIFIER argumentList block 
 						{fprintf(fp,"METHOD WITH RETURN TYPE VOID ENCOUNTERED\n");
 						fprintf(fp,"METHOD NAME: %s\n",$2);}	   
 						;
 
 argumentList:               			OPEN_PARENTHESES CLOSE_PARENTHESES                                    
                             			|OPEN_PARENTHESES type IDENTIFIER arg CLOSE_PARENTHESES 
+										{
+										if(flag)
+										fprintf(fp,"ARGUEMENT OF TYPE INT ENCOUNTERED\n");
+										else if(!flag)fprintf(fp,"ARGUEMENT OF TPE BOOLEAN ENCOUNTERED\n");
+										fprintf(fp,"Arguement Value: %s\n",$3);
+										}
 						;							
 
 arg:					    	/*epsilon*/ 								
@@ -115,15 +132,15 @@ arg:					    	/*epsilon*/
 						{fprintf(fp,"Arguement ID: %s\n",$3);}
 						;
 
-block:						OPEN_BRACE var_decl_multiple statement_multiple CLOSE_BRACE
-						{fprintf(fp,"block begins\n");}
+block:					OPEN_BRACE var_decl_multiple statement_multiple CLOSE_BRACE
+						{fprintf(fp,"BLOCK ends\n");}
 						;
 
 var_decl_multiple:				/*epsilon*/ 								
 						|var_decl_single SEMI_COLON var_decl_multiple
 						;							
 
-var_decl_single:				type IDENTIFIER variableList{
+var_decl_single:		type IDENTIFIER variableList{
 						if(flag)fprintf(fp,"INT DECLARATION ENCOUNTERED\n");
 						else if(flag==0)fprintf(fp,"BOOLEAN DECLARATION ENCOUNTERED\n");
 						fprintf(fp,"ID=%s\n",$2);
@@ -132,14 +149,17 @@ var_decl_single:				type IDENTIFIER variableList{
 						;
 
 variableList:					/*epsilon*/ 								
-						|COMMA IDENTIFIER variableList 		
+						|COMMA IDENTIFIER variableList 	
+						{if(flag)fprintf(fp,"INT DECLARATION ENCOUNTERED\n");
+						else if(flag==0)fprintf(fp,"BOOLEAN DECLARATION ENCOUNTERED\n");
+						fprintf(fp,"ID=%s\n",$2);}
 						;
 
 statement_multiple: 				/*epsilon*/ 								
 						|statement_multiple statement_single
 						;
 
-statement_single: 				location ASSIGNMENT_OPERATOR expr SEMI_COLON 
+statement_single: 		location ASSIGNMENT_OPERATOR expr SEMI_COLON 
 						{fprintf(fp,"ASSIGNMENT ENCOUNTERED\n");}		
 						|method_call SEMI_COLON 							
 						|IF condition block else_block 		    	
@@ -150,17 +170,18 @@ statement_single: 				location ASSIGNMENT_OPERATOR expr SEMI_COLON
 						|block 					
 						;
 
-else_block:                			/*epsilon*/                  
-                            			|ELSE block      
+else_block:             /*epsilon*/                  
+                        |ELSE block      
 						;
 
-condition:                  			OPEN_PARENTHESES expr CLOSE_PARENTHESES                                
+condition:              OPEN_PARENTHESES expr CLOSE_PARENTHESES 
+						;                               
 
-return_expr:                			/*epsilon*/                                   
-                            			|expr         
+return_expr:            /*epsilon*/                                   
+                         |expr         
 						;
 
-expr:						location 							
+expr:					location 							
 						|method_call 							
 						|literal 									
 						|arith_expr 							
@@ -180,52 +201,52 @@ method_call:			    		method_name OPEN_PARENTHESES parameterList CLOSE_PARENTHESE
 						|CALLOUT OPEN_PARENTHESES STRING_LITERAL  callout_arg CLOSE_PARENTHESES
 						;
 							
-method_name:                			IDENTIFIER     
+method_name:            IDENTIFIER     
 						;
 
-parameterList:              			/*epsilon*/                                 
-                            			| expr parameter 
-						;
+parameterList:              /*epsilon*/                                 
+                           | expr parameter 
+							;
 
-parameter:			    		/*epsilon*/ 							
+parameter:			    	/*epsilon*/ 							
 					    	|COMMA expr parameter 
-						;
+							;
 
-literal:                    			int_literal 								
-						|CHAR_LITERAL {fprintf(fp,"CHAR ENCOUNTERED=%s\n",$1);} 								
-						|BOOL_LITERAL {fprintf(fp,"BOOL ENCOUNTERED=%s\n",$1);}
-						;
+literal:                    int_literal 								
+							|CHAR_LITERAL {fprintf(fp,"CHAR ENCOUNTERED=%s\n",$1);} 								
+							|BOOL_LITERAL {fprintf(fp,"BOOL ENCOUNTERED=%s\n",$1);}
+							;
 
-int_literal:					DECIMAL_LITERAL {fprintf(fp,"INT ENCOUNTERED=%s\n",$1);}							
-						|HEX_LITERAL	{fprintf(fp,"INT ENCOUNTERED=%s\n",$1);}
-						;
+int_literal:				DECIMAL_LITERAL {fprintf(fp,"INT ENCOUNTERED=%d\n",$1);}							
+							|HEX_LITERAL	{fprintf(fp,"INT ENCOUNTERED=%s\n",$1);}
+							;
 
 arith_expr:					expr MULTIPLY expr 	{fprintf(fp,"MULTIPLICATION ENCOUNTERED\n",$1);}							
-						|expr DIVIDE expr {fprintf(fp,"DIVISON ENCOUNTERED\n");}								
-						|expr MOD expr 	{fprintf(fp,"MOD ENCOUNTERED\n");}							
-						|expr PLUS expr {fprintf(fp,"ADDITION ENCOUNTERED\n");}								
-						|expr MINUS expr{fprintf(fp,"SUBTRACTION ENCOUNTERED\n");}
-						|'-' expr %prec UMINUS	{fprintf(fp,"UNARY MINUS ENCOUNTERED\n");}		
-						;
+							|expr DIVIDE expr {fprintf(fp,"DIVISON ENCOUNTERED\n");}								
+							|expr MOD expr 	{fprintf(fp,"MOD ENCOUNTERED\n");}							
+							|expr PLUS expr {fprintf(fp,"ADDITION ENCOUNTERED\n");}								
+							|expr MINUS expr{fprintf(fp,"SUBTRACTION ENCOUNTERED\n");}
+							|'-' expr %prec UMINUS	{fprintf(fp,"UNARY MINUS ENCOUNTERED\n");}		
+							;
 
 rel_expr:					expr LESS expr 	{fprintf(fp,"LESS THAN ENCOUNTERED\n");}							
-						|expr GREATER expr 	{fprintf(fp,"GREATER THAN ENCOUNTERED\n");}						
-						|expr LESS_EQUAL expr 	{fprintf(fp,"LESS THAN EQUAL ENCOUNTERED\n");}					
-						|expr GREATER_EQUAL expr {fprintf(fp,"GREATER THAN ENCOUNTERED\n");}
-						;
+							|expr GREATER expr 	{fprintf(fp,"GREATER THAN ENCOUNTERED\n");}						
+							|expr LESS_EQUAL expr 	{fprintf(fp,"LESS THAN EQUAL ENCOUNTERED\n");}					
+							|expr GREATER_EQUAL expr {fprintf(fp,"GREATER THAN ENCOUNTERED\n");}
+							;
 
 equal_expr:					expr EQUAL_EQUAL expr 	{fprintf(fp,"EQUAL EQUAL ENCOUNTERED\n");}					
-						|expr NOT_EQUAL expr 	{fprintf(fp,"NOT EQUAL ENCOUNTERED\n");}
-						;
+							|expr NOT_EQUAL expr 	{fprintf(fp,"NOT EQUAL ENCOUNTERED\n");}
+							;
 
-condition_expr:					expr AND expr 		{fprintf(fp,"AND ENCOUNTERED\n");}						
-						|expr OR expr 		{fprintf(fp,"OR ENCOUNTERED\n");}
-						;
+condition_expr:				expr AND expr 		{fprintf(fp,"AND ENCOUNTERED\n");}						
+							|expr OR expr 		{fprintf(fp,"OR ENCOUNTERED\n");}
+							;
 
-callout_arg:			    		/*epsilon*/ 								
-						|callout_arg COMMA expr   			
-						|callout_arg COMMA STRING_LITERAL {fprintf(fp,"CALLOUT TO %s ENCOUNTERED\n",$3);}
-						;
+callout_arg:			    /*epsilon*/ 								
+							|callout_arg COMMA expr   			
+							|callout_arg COMMA STRING_LITERAL {fprintf(fp,"CALLOUT TO %s ENCOUNTERED\n",$3);}
+							;
 
 %%
 

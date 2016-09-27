@@ -1,5 +1,6 @@
 %{ 
 	#define YY_NO_UNPUT
+	#include<bits/stdc++.h>
 	#include <iostream>
 	#include <stdio.h>
 	#include <string>
@@ -70,9 +71,9 @@
 
 ">"										{cout<<"GREATER\n";return GREATER;}
 
-[_a-zA-Z]+[_a-zA-Z0-9]*					{cout<<"IDENTIFIER\n";return IDENTIFIER;}
+[_a-zA-Z]+[_a-zA-Z0-9]*					{yylval=strdup(yytext);cout<<"IDENTIFIER\n";return IDENTIFIER;}
 
-[0-9]+								    {cout<<"DECIMAL_LITERAL\n";return DECIMAL_LITERAL;}
+[0-9]+								    {yylval=atoi(yytext);cout<<"DECIMAL_LITERAL\n";return DECIMAL_LITERAL;}
 
 0x[0-9a-fA-F]+							{cout<<"HEX_LITERAL\n";return HEX_LITERAL;}
 
