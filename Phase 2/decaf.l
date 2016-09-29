@@ -95,7 +95,9 @@
 
 \/\/.*$  														
 
-[ \t\n]*		
+[ \t]*
+
+[ \n]*									{cout<<"\n";}		
 
 \"(\\.|[^\\"])*\"                   	{cout<<"STRING: "<<yytext<<endl;return STRING_LITERAL;}
 
