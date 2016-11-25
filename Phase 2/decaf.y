@@ -15,7 +15,7 @@ FILE * fp= fopen ("bison_output.txt", "w");
 %}
 
 
-
+/* defining tokens*/
 %token CLASS
 %token PROGRAM
 %token FOR
@@ -43,6 +43,9 @@ FILE * fp= fopen ("bison_output.txt", "w");
 %token NULL_TOKEN
 %token COMMA
 %token NOT
+
+/* defining associativity... also removed certain shift-reduce errors */
+
 %left INT BOOL
 %nonassoc ELSE
 %nonassoc '='
@@ -58,6 +61,8 @@ FILE * fp= fopen ("bison_output.txt", "w");
 
 %%
 
+/* defining the grammar of the language */
+/* syntax directed translations... the rules are also associated with certain functions to be performed which are written in  {} braces */
 
 program: 					CLASS PROGRAM  OPEN_BRACE field_decl_multiple method_decl_multiple CLOSE_BRACE
 							{fprintf(fp,"PROGRAM ENCOUNTERED\n");}
@@ -250,13 +255,14 @@ callout_arg:			    /*epsilon*/
 
 %%
 
+/* defining the error function */
 
 int yyerror(string s)
 {
   extern int yylineno;	// defined and MAINtained in lex.c
   extern char *yytext;	// defined and MAINtained in lex.c
   
-  cerr << "ERROR: " << s << " at symbol \"" << yytext;
+  cerr << "ERROR: " << s << " at symbol \"" << yytext; // reporting the error at line no yylineno
   cerr << "\" on line " << yylineno << endl;
   cerr << "Syntax error\n";
   exit(1);

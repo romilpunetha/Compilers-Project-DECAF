@@ -9,6 +9,9 @@
 	int yyerror(char *s);
 %}
 %option warn noyywrap noinput nounput yylineno
+
+/* defining patterns */
+
 %%
 
 "class"  				    			{cout<<"CLASS\n";return CLASS;}
@@ -101,7 +104,7 @@
 
 \"(\\.|[^\\"])*\"                   	{cout<<"STRING: "<<yytext<<endl;return STRING_LITERAL;}
 
-[/][*][^*]*[*]+([^*/][^*]*[*]+)*[/] 	{}
+[/][*][^*]*[*]+([^*/][^*]*[*]+)*[/] 	{} 
 
 "//".*		  {}/* discard comments */
 
